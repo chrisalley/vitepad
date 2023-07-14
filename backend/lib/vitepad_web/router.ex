@@ -7,6 +7,8 @@ defmodule VitepadWeb.Router do
 
   scope "/api", VitepadWeb do
     pipe_through :api
+
+    resources "/documents", DocumentController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
