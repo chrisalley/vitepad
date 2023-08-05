@@ -1,12 +1,7 @@
 import { ReactElement } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-
-interface Document {
-  id: number
-  name: string
-  content: string
-}
+import { Document } from './types'
 
 interface DocumentsResponse {
   data: [Document]
@@ -32,8 +27,15 @@ export default function DocumentList(): ReactElement {
   }
 
   return (
-    <ul>
-      {data?.data.map((document) => <li key={document.id}>{document.name}</li>)}
-    </ul>
+    <div>
+      <h2>Documents</h2>
+      <ul>
+        {data?.data.map((document) => (
+          <li key={document.id}>
+            <a href={`/documents/${document.id}`}>{document.name}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
