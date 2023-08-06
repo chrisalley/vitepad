@@ -28,7 +28,8 @@ export default function DocumentList(): ReactElement {
 
   return (
     <div>
-      <h2>Documents</h2>
+      <a href="/documents/new">New Document</a>
+      <h2>Documents List</h2>
       <ul>
         {data?.data.map((document) => (
           <li key={document.id}>

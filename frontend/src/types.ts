@@ -3,3 +3,7 @@ export interface Document {
   name: string
   content: string
 }
+
+export interface DocumentResponse {
+  data: Document
+}

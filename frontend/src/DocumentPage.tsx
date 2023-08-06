@@ -1,25 +1,13 @@
 import { ReactElement } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
-import { Document } from './types'
-
-interface DocumentResponse {
-  data: Document
-}
+import { fetchDocument } from './queries'
 
 export default function DocumentPage(): ReactElement {
   const documentId = location.pathname.split('/')[2]
 
-  const fetchDocument = async (): Promise<DocumentResponse> => {
-    const response = await axios.get(
-      'http://localhost:4000/api/documents/' + documentId,
-    )
-    return response.data as DocumentResponse
-  }
-
   const { data, error, isLoading, isError } = useQuery({
-    queryKey: ['document'],
-    queryFn: fetchDocument,
+    queryKey: ['document', documentId],
+    queryFn: () => fetchDocument(documentId),
   })
 
   if (isLoading) {
@@ -33,6 +21,14 @@ export default function DocumentPage(): ReactElement {
   return (
     <div>
       <h1>{data?.data.name}</h1>
+      <ul>
+        <li>
+          <a href="/">Documents List</a>
+        </li>
+        <li>
+          <a href={`/documents/${documentId}/edit`}>Edit Document</a>
+        </li>
+      </ul>
       <p>{data?.data.content}</p>
     </div>
   )

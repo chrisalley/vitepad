@@ -46,7 +46,7 @@ defmodule VitepadWeb.Endpoint do
   plug Plug.Head
 
   # Accept requests from React frontend in development environment:
-  plug Corsica, origins: "http://localhost:5173"
+  plug Corsica, origins: "http://localhost:5173", allow_headers: ["content-type"]
 
   plug Plug.Session, @session_options
   plug VitepadWeb.Router
